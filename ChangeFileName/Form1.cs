@@ -15,13 +15,19 @@ namespace ChangeFileName
         public Form1()
         {
             InitializeComponent();
-            textBox1.Text =  ConfigurationManager.AppSettings["defaultDir"].ToString();
+            /*textBox1.Text =  ConfigurationManager.AppSettings["defaultDir"].ToString();
             textBox3.Text = ConfigurationManager.AppSettings["newDir"].ToString();
             StringBuilder text = new StringBuilder();
             text.AppendLine("1.请先点击【目录】选择要修改的文件夹");
             text.AppendLine("2.请在新名称框中输入要修改的名称（只需输入新名称，不需要完整路径）");
             text.Append("3.点击【一键修改】完成新名称的修改！");
             label4.Text = text.ToString();
+            */
+            textBox1.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "datas\\NCSData\\1000002");
+            textBox3.Text = "10000002";
+
+            button2_Click(null, null);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -56,12 +62,12 @@ namespace ChangeFileName
 
             if (!Directory.Exists(oldPath))
             {
-                MessageBox.Show("原文件夹不存在，请检查是否已经被删除！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("原文件[" + oldPath + "]夹不存在，请检查是否已经被删除！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (Directory.Exists(newPath))
             {
-                MessageBox.Show("新文件夹已存在，请重新填写！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("新文件夹[" + newPath + "]已存在，请重新填写！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             //重命名
@@ -75,6 +81,11 @@ namespace ChangeFileName
             {
                 MessageBox.Show("修改失败！\r\n错误原因:"+ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
