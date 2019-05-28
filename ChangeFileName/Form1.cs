@@ -28,6 +28,10 @@ namespace ChangeFileName
 
             button2_Click(null, null);
 
+            textBox1.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "datas\\NCSData\\1000001");
+            textBox3.Text = "10000001";
+
+            button2_Click(null, null);
         }
 
         private void button1_Click(object sender, EventArgs e)
